@@ -19,7 +19,7 @@ describe AuditTables do
     ActiveRecord::Base.connection.create_table(:entities) do |t|
       t.string :name
 
-      t.timestamp
+      t.timestamps
     end
   end
 
