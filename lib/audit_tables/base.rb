@@ -15,7 +15,7 @@ module AuditTables
       if properties.empty?
         add_column audit_table_name, column.name, column_type
       else
-        add_column audit_table_name, column.name, column_type, properties
+        add_column audit_table_name, column.name, column_type, **properties
       end
     end
 
