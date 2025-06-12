@@ -19,7 +19,7 @@ describe AuditTables do
     ActiveRecord::Base.connection.create_table(:entities) do |t|
       t.string :name
 
-      t.timestamp
+      t.timestamps
     end
   end
 
@@ -34,7 +34,7 @@ describe AuditTables do
       before { setup_database }
 
       it 'database is audit_tables_test' do
-        expect(ActiveRecord::Base.connection_config[:database]).to match(/audit_tables_test/)
+        expect(ActiveRecord::Base.connection.current_database).to match(/audit_tables_test/)
       end
 
       it 'entities table should have an audit table' do
