@@ -63,7 +63,7 @@ The following public methods are exposed by the `AuditTables` module:
 #### Example Migration
 
 ```
-class ExampleMigration < ActiveRecord::Migration[5.0]
+class ExampleMigration < ActiveRecord::Migration[8.0]
   def change
     create_table :widgets do |t|
       t.string :name

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 module AuditTables
-  class Base < ActiveRecord::Migration[5.0]
+  class Base < ActiveRecord::Migration[8.0]
     attr_accessor :audit_table_name, :column, :klass, :table_name
 
     def initialize(table_name)
