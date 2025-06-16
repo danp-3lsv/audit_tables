@@ -41,6 +41,10 @@ describe AuditTables do
         AuditTables.create_audit_table_for(:entities)
 
         expect(ActiveRecord::Base.connection.data_source_exists?(:audit_entities)).to eq(true)
+        ActiveRecord::Base.connection.columns(:entities).each do |source_col|
+          audit_col = ActiveRecord::Base.connection.columns(:audit_entities).select {|c| c.name == source_col.name}.first
+          expect(audit_col.type).to eq(source_col.type)
+        end
       end
     end
 
