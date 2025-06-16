@@ -76,6 +76,16 @@ describe AuditTables do
           Entity.last.delete
         end.to change(AuditEntity, :count).by(1)
       end
+
+      it 'warns about trigger errors and continues without raising exception' do
+        ActiveRecord::Base.connection.add_column(:entities, :extra_col, :string)
+
+        expect do
+          entity = create_new_entity(new_name) # produces: SQLERRM=INSERT has more expressions than target columns
+        end.to change(AuditEntity, :count).by(0)
+
+        ActiveRecord::Base.connection.remove_column(:entities, :extra_col)
+      end
     end
   end
 end

@@ -33,6 +33,10 @@ module AuditTables
             SELECT nextval('#{sequence_name}'), 'DELETE', NOW(), OLD.*;
           END IF;
           RETURN NULL;
+        EXCEPTION WHEN OTHERS THEN
+          RAISE WARNING 'Error in % on table %.%; TG_OP=%; SQLSTATE=%; SQLERRM=%',
+            TG_NAME, TG_TABLE_SCHEMA, TG_TABLE_NAME, TG_OP, SQLSTATE, SQLERRM;
+          RETURN null;
         END;
         $body$
         LANGUAGE plpgsql
